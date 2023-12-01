@@ -92,79 +92,85 @@ function App() {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">
-                Game of Thrones Characters
-            </h1>
+        <div className="min-h-screen bg-gray-100">
+            <header className="bg-gray-800 text-white py-2">
+                <div className="container mx-auto text-center">
+                    <h1 className="text-3xl font-bold">
+                        Game of Thrones Characters
+                    </h1>
+                </div>
+            </header>
 
-            <div className="max-w-screen-md mx-auto">
-                <table className="w-full border-collapse border">
-                    <thead>
-                        <tr className="bg-gray-800 text-white">
-                            <th
-                                className="p-2 cursor-pointer"
-                                onClick={() => handleSort("id")}
-                                onMouseEnter={() => setHoveredColumn("id")}
-                                onMouseLeave={() => setHoveredColumn(null)}
-                            >
-                                ID{" "}
-                                {sortColumn === "id" &&
-                                    (sortOrder === "asc" ? "▲" : "▼")}
-                                {sortColumn !== "id" &&
-                                    (hoveredColumn === "id" ? (
-                                        "▲"
-                                    ) : (
-                                        <span className="opacity-0">▲</span>
-                                    ))}
-                            </th>
-                            <th
-                                className="p-2 cursor-pointer"
-                                onClick={() => handleSort("fullName")}
-                                onMouseEnter={() =>
-                                    setHoveredColumn("fullName")
-                                }
-                                onMouseLeave={() => setHoveredColumn(null)}
-                            >
-                                Name{" "}
-                                {sortColumn === "fullName" &&
-                                    (sortOrder === "asc" ? "▲" : "▼")}
-                                {sortColumn !== "fullName" &&
-                                    (hoveredColumn === "fullName" ? (
-                                        "▲"
-                                    ) : (
-                                        <span className="opacity-0">▲</span>
-                                    ))}
-                            </th>
-                            <th className="p-2">Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            <tr>
-                                <td colSpan={3} className="p-4">
-                                    Loading...
-                                </td>
+            <main className="container mx-auto p-4 mt-8">
+                <div className="max-w-screen-md mx-auto">
+                    <table className="w-full border-collapse border bg-white shadow-md">
+                        <thead>
+                            <tr className="bg-gray-800 text-white">
+                                <th
+                                    className="p-2 cursor-pointer"
+                                    onClick={() => handleSort("id")}
+                                    onMouseEnter={() => setHoveredColumn("id")}
+                                    onMouseLeave={() => setHoveredColumn(null)}
+                                >
+                                    ID{" "}
+                                    {sortColumn === "id" &&
+                                        (sortOrder === "asc" ? "▲" : "▼")}
+                                    {sortColumn !== "id" &&
+                                        (hoveredColumn === "id" ? (
+                                            "▲"
+                                        ) : (
+                                            <span className="opacity-0">▲</span>
+                                        ))}
+                                </th>
+                                <th
+                                    className="p-2 cursor-pointer"
+                                    onClick={() => handleSort("fullName")}
+                                    onMouseEnter={() =>
+                                        setHoveredColumn("fullName")
+                                    }
+                                    onMouseLeave={() => setHoveredColumn(null)}
+                                >
+                                    Name{" "}
+                                    {sortColumn === "fullName" &&
+                                        (sortOrder === "asc" ? "▲" : "▼")}
+                                    {sortColumn !== "fullName" &&
+                                        (hoveredColumn === "fullName" ? (
+                                            "▲"
+                                        ) : (
+                                            <span className="opacity-0">▲</span>
+                                        ))}
+                                </th>
+                                <th className="p-2">Image</th>
                             </tr>
-                        ) : (
-                            sortedCharacters.map((character) => (
-                                <ListItem
-                                    key={character.id}
-                                    character={character}
-                                    onListItemClick={handleListItemClick}
-                                />
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {loading ? (
+                                <tr>
+                                    <td colSpan={3} className="p-4">
+                                        Loading...
+                                    </td>
+                                </tr>
+                            ) : (
+                                sortedCharacters.map((character) => (
+                                    <ListItem
+                                        key={character.id}
+                                        character={character}
+                                        onListItemClick={handleListItemClick}
+                                    />
+                                ))
+                            )}
+                        </tbody>
+                    </table>
 
-                <PaginationControls
-                    currentPage={currentPage}
-                    itemsPerPage={itemsPerPage}
-                    totalItems={characters.length}
-                    onPageChange={handlePageChange}
-                    onItemsPerPageChange={handleItemsPerPageChange}
-                />
-            </div>
+                    <PaginationControls
+                        currentPage={currentPage}
+                        itemsPerPage={itemsPerPage}
+                        totalItems={characters.length}
+                        onPageChange={handlePageChange}
+                        onItemsPerPageChange={handleItemsPerPageChange}
+                    />
+                </div>
+            </main>
 
             {showModal && selectedCharacter && (
                 <CharacterModal
@@ -172,6 +178,12 @@ function App() {
                     onClose={handleCloseModal}
                 />
             )}
+
+            <footer className="bg-gray-800 text-white py-2 mt-8">
+                <div className="container mx-auto text-center">
+                    <p>&copy; 2023 Game of Thrones</p>
+                </div>
+            </footer>
         </div>
     );
 }

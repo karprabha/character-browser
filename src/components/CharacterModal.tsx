@@ -11,7 +11,7 @@ const CharacterModal: React.FC<CharacterModalProps> = ({
 }) => {
     return (
         <div
-            className="fixed inset-0 z-10 overflow-y-auto bg-gray-800 bg-opacity-50"
+            className="fixed inset-0 z-10 overflow-y-auto bg-gray-600 bg-opacity-50"
             onClick={onClose}
         >
             <div className="flex items-center justify-center min-h-screen">
