@@ -97,52 +97,74 @@ function App() {
                 Game of Thrones Characters
             </h1>
 
-            <table className="w-full">
-                <thead>
-                    <tr>
-                        <th
-                            onClick={() => handleSort("id")}
-                            onMouseEnter={() => setHoveredColumn("id")}
-                            onMouseLeave={() => setHoveredColumn(null)}
-                        >
-                            ID{" "}
-                            {sortColumn === "id" &&
-                                (sortOrder === "asc" ? "▲" : "▼")}
-                            {sortColumn !== "id" &&
-                                hoveredColumn === "id" &&
-                                "▲"}
-                        </th>
-                        <th
-                            onClick={() => handleSort("fullName")}
-                            onMouseEnter={() => setHoveredColumn("fullName")}
-                            onMouseLeave={() => setHoveredColumn(null)}
-                        >
-                            Name{" "}
-                            {sortColumn === "fullName" &&
-                                (sortOrder === "asc" ? "▲" : "▼")}
-                            {sortColumn !== "fullName" &&
-                                hoveredColumn === "fullName" &&
-                                "▲"}
-                        </th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {loading ? (
-                        <tr>
-                            <td colSpan={3}>Loading...</td>
+            <div className="max-w-screen-md mx-auto">
+                <table className="w-full border-collapse border">
+                    <thead>
+                        <tr className="bg-gray-800 text-white">
+                            <th
+                                className="p-2 cursor-pointer"
+                                onClick={() => handleSort("id")}
+                                onMouseEnter={() => setHoveredColumn("id")}
+                                onMouseLeave={() => setHoveredColumn(null)}
+                            >
+                                ID{" "}
+                                {sortColumn === "id" &&
+                                    (sortOrder === "asc" ? "▲" : "▼")}
+                                {sortColumn !== "id" &&
+                                    (hoveredColumn === "id" ? (
+                                        "▲"
+                                    ) : (
+                                        <span className="opacity-0">▲</span>
+                                    ))}
+                            </th>
+                            <th
+                                className="p-2 cursor-pointer"
+                                onClick={() => handleSort("fullName")}
+                                onMouseEnter={() =>
+                                    setHoveredColumn("fullName")
+                                }
+                                onMouseLeave={() => setHoveredColumn(null)}
+                            >
+                                Name{" "}
+                                {sortColumn === "fullName" &&
+                                    (sortOrder === "asc" ? "▲" : "▼")}
+                                {sortColumn !== "fullName" &&
+                                    (hoveredColumn === "fullName" ? (
+                                        "▲"
+                                    ) : (
+                                        <span className="opacity-0">▲</span>
+                                    ))}
+                            </th>
+                            <th className="p-2">Image</th>
                         </tr>
-                    ) : (
-                        sortedCharacters.map((character) => (
-                            <ListItem
-                                key={character.id}
-                                character={character}
-                                onListItemClick={handleListItemClick}
-                            />
-                        ))
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {loading ? (
+                            <tr>
+                                <td colSpan={3} className="p-4">
+                                    Loading...
+                                </td>
+                            </tr>
+                        ) : (
+                            sortedCharacters.map((character) => (
+                                <ListItem
+                                    key={character.id}
+                                    character={character}
+                                    onListItemClick={handleListItemClick}
+                                />
+                            ))
+                        )}
+                    </tbody>
+                </table>
+
+                <PaginationControls
+                    currentPage={currentPage}
+                    itemsPerPage={itemsPerPage}
+                    totalItems={characters.length}
+                    onPageChange={handlePageChange}
+                    onItemsPerPageChange={handleItemsPerPageChange}
+                />
+            </div>
 
             {showModal && selectedCharacter && (
                 <CharacterModal
@@ -150,14 +172,6 @@ function App() {
                     onClose={handleCloseModal}
                 />
             )}
-
-            <PaginationControls
-                currentPage={currentPage}
-                itemsPerPage={itemsPerPage}
-                totalItems={characters.length}
-                onPageChange={handlePageChange}
-                onItemsPerPageChange={handleItemsPerPageChange}
-            />
         </div>
     );
 }
