@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
-
-interface Character {
-    id: number;
-    firstName: string;
-    lastName: string;
-    fullName: string;
-    title: string;
-    family: string;
-    image: string;
-    imageUrl: string;
-}
+import ListItem from "./components/ListItem";
+import { Character } from "./types";
 
 function App() {
     const [characters, setCharacters] = useState<Character[]>([]);
@@ -45,19 +36,10 @@ function App() {
                 <>
                     <ul>
                         {characters.map((character) => (
-                            <li>
-                                <div>
-                                    <img
-                                        src={character.imageUrl}
-                                        alt={character.fullName}
-                                    />
-                                </div>
-                                <div>
-                                    <p>ID: {character.id}</p>
-                                    <p>Name: {character.fullName}</p>
-                                    <p>Family: {character.family}</p>
-                                </div>
-                            </li>
+                            <ListItem
+                                key={character.id}
+                                character={character}
+                            />
                         ))}
                     </ul>
                 </>
