@@ -36,15 +36,34 @@ const CharacterModal: React.FC<CharacterModalProps> = ({
                             alt={character.fullName}
                             className="w-full h-auto max-h-96 object-contain rounded mb-4"
                         />
-                        <p className="mb-2">ID: {character.id}</p>
                         <p className="mb-2">
-                            First Name: {character.firstName}
+                            <span className="font-semibold">ID:</span>{" "}
+                            {character.id}
                         </p>
-                        <p className="mb-2">Last Name: {character.lastName}</p>
-                        <p className="mb-2">Title: {character.title}</p>
-                        <p className="mb-2">Family: {character.family}</p>
-                        <p className="mb-2">Image: {character.image}</p>
-                        <p className="mb-2">Image URL: {character.imageUrl}</p>
+                        <p className="mb-2">
+                            <span className="font-semibold">First Name:</span>{" "}
+                            {character.firstName}
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Last Name:</span>{" "}
+                            {character.lastName}
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Title:</span>{" "}
+                            {character.title}
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Family:</span>{" "}
+                            {character.family}
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Image:</span>{" "}
+                            {character.image}
+                        </p>
+                        <p className="mb-2">
+                            <span className="font-semibold">Image URL:</span>{" "}
+                            {character.imageUrl}
+                        </p>
                     </div>
                     <div className="flex justify-end p-4">
                         <button
