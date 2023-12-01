@@ -17,14 +17,17 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
     const endIndex = startIndex + itemsPerPage;
 
     return (
-        <div className="flex items-center justify-end mt-4 gap-4">
+        <div className="flex items-center justify-end py-3 px-2 gap-4">
             <div className="flex items-center">
-                <span className="mr-2">Items per page:</span>
+                <span className="text-sm font-light text-gray-600 mr-2">
+                    Items per page:
+                </span>
                 <select
                     value={itemsPerPage}
                     onChange={(e) =>
                         onItemsPerPageChange(Number(e.target.value))
                     }
+                    className="bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded"
                 >
                     {[5, 10, 20].map((option) => (
                         <option key={option} value={option}>
@@ -35,7 +38,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
             </div>
 
             <div className="flex items-center gap-4">
-                <span>
+                <span className="text-sm font-light text-gray-600">
                     {startIndex + 1} – {Math.min(endIndex, totalItems)} of{" "}
                     {totalItems}
                 </span>
@@ -43,12 +46,22 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
                     <button
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={currentPage === 1}
+                        className={`px-2.5 pb-1 pt-0.5 rounded ${
+                            currentPage === 1
+                                ? "bg-gray-300 text-gray-500"
+                                : "bg-gray-800 text-white hover:bg-gray-950"
+                        }`}
                     >
                         {"<"}
                     </button>
                     <button
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={endIndex >= totalItems}
+                        className={`px-2.5 pb-1 pt-0.5 rounded ${
+                            endIndex >= totalItems
+                                ? "bg-gray-300 text-gray-500"
+                                : "bg-gray-800 text-white hover:bg-gray-950"
+                        }`}
                     >
                         {">"}
                     </button>
