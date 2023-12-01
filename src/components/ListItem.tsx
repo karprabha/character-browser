@@ -8,7 +8,7 @@ interface ListItemProps {
 const ListItem: React.FC<ListItemProps> = ({ character, onListItemClick }) => {
     return (
         <tr
-            className="cursor-pointer hover:bg-gray-100"
+            className="cursor-pointer hover:bg-gray-100 border"
             onClick={() => onListItemClick(character)}
         >
             <td className="p-1 text-center">{character.id}</td>
