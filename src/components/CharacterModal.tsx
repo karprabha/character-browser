@@ -36,34 +36,72 @@ const CharacterModal: React.FC<CharacterModalProps> = ({
                             alt={character.fullName}
                             className="w-full h-auto max-h-96 object-contain rounded mb-4"
                         />
-                        <p className="mb-2">
-                            <span className="font-semibold">ID:</span>{" "}
-                            {character.id}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">First Name:</span>{" "}
-                            {character.firstName}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Last Name:</span>{" "}
-                            {character.lastName}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Title:</span>{" "}
-                            {character.title}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Family:</span>{" "}
-                            {character.family}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Image:</span>{" "}
-                            {character.image}
-                        </p>
-                        <p className="mb-2">
-                            <span className="font-semibold">Image URL:</span>{" "}
-                            {character.imageUrl}
-                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="mb-2 col-span-2 text-center">
+                                <span className="text-xl font-bold">
+                                    ID: {character.id}
+                                </span>
+                            </div>
+
+                            <div className="mb-2  justify-items-center">
+                                <span className="text-gray-700 font-semibold">
+                                    First Name:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.firstName}
+                                </span>
+                            </div>
+                            <div className="mb-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Last Name:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.lastName}
+                                </span>
+                            </div>
+
+                            <div className="mb-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Full Name:{" "}
+                                </span>
+                                <span className="text-gray-800">{`${character.firstName} ${character.lastName}`}</span>
+                            </div>
+
+                            <div className="mb-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Title:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.title}
+                                </span>
+                            </div>
+
+                            <div className="mb-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Family:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.family}
+                                </span>
+                            </div>
+                            <div className="mb-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Image:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.image}
+                                </span>
+                            </div>
+
+                            <div className="mb-2 col-span-2">
+                                <span className="text-gray-700 font-semibold">
+                                    Image URL:{" "}
+                                </span>
+                                <span className="text-gray-800">
+                                    {character.imageUrl}
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div className="flex justify-end p-4">
                         <button
