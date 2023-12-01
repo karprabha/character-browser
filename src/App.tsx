@@ -5,6 +5,7 @@ import ListItem from "./components/ListItem";
 import PaginationControls from "./components/PaginationControls";
 import CharacterModal from "./components/CharacterModal";
 import ListHeader from "./components/ListHeader";
+import SkeletonListItem from "./components/SkeletonListItem";
 
 const ITEMS_PER_PAGE_OPTIONS = [5, 10, 20];
 
@@ -110,21 +111,19 @@ function App() {
                             />
                         </thead>
                         <tbody>
-                            {loading ? (
-                                <tr>
-                                    <td colSpan={3} className="p-4">
-                                        Loading...
-                                    </td>
-                                </tr>
-                            ) : (
-                                sortedCharacters.map((character) => (
-                                    <ListItem
-                                        key={character.id}
-                                        character={character}
-                                        onListItemClick={handleListItemClick}
-                                    />
-                                ))
-                            )}
+                            {loading
+                                ? Array.from({ length: itemsPerPage }).map(
+                                      (_, index) => (
+                                          <SkeletonListItem key={index} />
+                                      )
+                                  )
+                                : sortedCharacters.map((character) => (
+                                      <ListItem
+                                          key={character.id}
+                                          character={character}
+                                          onListItemClick={handleListItemClick}
+                                      />
+                                  ))}
                         </tbody>
                     </table>
 
