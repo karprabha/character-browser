@@ -11,6 +11,11 @@ function App() {
     const [characters, setCharacters] = useState<Character[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_OPTIONS[1]);
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+    const [sortColumn, setSortColumn] = useState<"id" | "fullName">("id");
+    const [hoveredColumn, setHoveredColumn] = useState<
+        "id" | "fullName" | null
+    >(null);
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -36,7 +41,29 @@ function App() {
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const displayedCharacters = characters.slice(startIndex, endIndex);
+
+    const handleSort = (column: "id" | "fullName") => {
+        if (sortColumn !== column) {
+            setSortOrder("asc");
+            setSortColumn(column);
+        } else {
+            setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+            setSortColumn(column);
+        }
+    };
+
+    const sortedCharacters = characters
+        .slice(startIndex, endIndex)
+        .sort((a, b) => {
+            if (sortColumn === "id") {
+                return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
+            } else if (sortColumn === "fullName") {
+                return sortOrder === "asc"
+                    ? a.fullName.localeCompare(b.fullName)
+                    : b.fullName.localeCompare(a.fullName);
+            }
+            return 0;
+        });
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -56,8 +83,30 @@ function App() {
             <table className="w-full">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
+                        <th
+                            onClick={() => handleSort("id")}
+                            onMouseEnter={() => setHoveredColumn("id")}
+                            onMouseLeave={() => setHoveredColumn(null)}
+                        >
+                            ID{" "}
+                            {sortColumn === "id" &&
+                                (sortOrder === "asc" ? "▲" : "▼")}
+                            {sortColumn !== "id" &&
+                                hoveredColumn === "id" &&
+                                "▲"}
+                        </th>
+                        <th
+                            onClick={() => handleSort("fullName")}
+                            onMouseEnter={() => setHoveredColumn("fullName")}
+                            onMouseLeave={() => setHoveredColumn(null)}
+                        >
+                            Name{" "}
+                            {sortColumn === "fullName" &&
+                                (sortOrder === "asc" ? "▲" : "▼")}
+                            {sortColumn !== "fullName" &&
+                                hoveredColumn === "fullName" &&
+                                "▲"}
+                        </th>
                         <th>Image</th>
                     </tr>
                 </thead>
@@ -67,7 +116,7 @@ function App() {
                             <td colSpan={3}>Loading...</td>
                         </tr>
                     ) : (
-                        displayedCharacters.map((character) => (
+                        sortedCharacters.map((character) => (
                             <ListItem
                                 key={character.id}
                                 character={character}
