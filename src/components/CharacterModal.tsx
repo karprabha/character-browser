@@ -16,7 +16,7 @@ const CharacterModal: React.FC<CharacterModalProps> = ({
         >
             <div className="flex items-center justify-center min-h-screen">
                 <div
-                    className="bg-white rounded-lg overflow-hidden shadow-xl w-full max-w-2xl"
+                    className="bg-white rounded-lg overflow-hidden shadow-xl w-full max-w-xl"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="flex justify-between items-center px-4 py-2 bg-gray-800 text-white">
