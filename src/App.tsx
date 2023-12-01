@@ -4,6 +4,7 @@ import { Character } from "./types";
 import ListItem from "./components/ListItem";
 import PaginationControls from "./components/PaginationControls";
 import CharacterModal from "./components/CharacterModal";
+import ListHeader from "./components/ListHeader";
 
 const ITEMS_PER_PAGE_OPTIONS = [5, 10, 20];
 
@@ -16,9 +17,6 @@ function App() {
 
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
     const [sortColumn, setSortColumn] = useState<"id" | "fullName">("id");
-    const [hoveredColumn, setHoveredColumn] = useState<
-        "id" | "fullName" | null
-    >(null);
 
     const [showModal, setShowModal] = useState(false);
     const [selectedCharacter, setSelectedCharacter] =
@@ -105,43 +103,11 @@ function App() {
                 <div className="max-w-screen-md mx-auto">
                     <table className="w-full border-collapse border bg-white shadow-md">
                         <thead>
-                            <tr className="bg-gray-800 text-white">
-                                <th
-                                    className="p-2 cursor-pointer"
-                                    onClick={() => handleSort("id")}
-                                    onMouseEnter={() => setHoveredColumn("id")}
-                                    onMouseLeave={() => setHoveredColumn(null)}
-                                >
-                                    ID{" "}
-                                    {sortColumn === "id" &&
-                                        (sortOrder === "asc" ? "▲" : "▼")}
-                                    {sortColumn !== "id" &&
-                                        (hoveredColumn === "id" ? (
-                                            "▲"
-                                        ) : (
-                                            <span className="opacity-0">▲</span>
-                                        ))}
-                                </th>
-                                <th
-                                    className="p-2 cursor-pointer"
-                                    onClick={() => handleSort("fullName")}
-                                    onMouseEnter={() =>
-                                        setHoveredColumn("fullName")
-                                    }
-                                    onMouseLeave={() => setHoveredColumn(null)}
-                                >
-                                    Name{" "}
-                                    {sortColumn === "fullName" &&
-                                        (sortOrder === "asc" ? "▲" : "▼")}
-                                    {sortColumn !== "fullName" &&
-                                        (hoveredColumn === "fullName" ? (
-                                            "▲"
-                                        ) : (
-                                            <span className="opacity-0">▲</span>
-                                        ))}
-                                </th>
-                                <th className="p-2">Image</th>
-                            </tr>
+                            <ListHeader
+                                handleSort={handleSort}
+                                sortOrder={sortOrder}
+                                sortColumn={sortColumn}
+                            />
                         </thead>
                         <tbody>
                             {loading ? (
