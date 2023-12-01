@@ -3,19 +3,26 @@ import { useEffect, useState } from "react";
 import { Character } from "./types";
 import ListItem from "./components/ListItem";
 import PaginationControls from "./components/PaginationControls";
+import CharacterModal from "./components/CharacterModal";
 
 const ITEMS_PER_PAGE_OPTIONS = [5, 10, 20];
 
 function App() {
     const [loading, setLoading] = useState(true);
     const [characters, setCharacters] = useState<Character[]>([]);
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(ITEMS_PER_PAGE_OPTIONS[1]);
+
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
     const [sortColumn, setSortColumn] = useState<"id" | "fullName">("id");
     const [hoveredColumn, setHoveredColumn] = useState<
         "id" | "fullName" | null
     >(null);
+
+    const [showModal, setShowModal] = useState(false);
+    const [selectedCharacter, setSelectedCharacter] =
+        useState<Character | null>(null);
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -64,6 +71,16 @@ function App() {
             }
             return 0;
         });
+
+    const handleListItemClick = (character: Character) => {
+        setSelectedCharacter(character);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedCharacter(null);
+    };
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -120,11 +137,19 @@ function App() {
                             <ListItem
                                 key={character.id}
                                 character={character}
+                                onListItemClick={handleListItemClick}
                             />
                         ))
                     )}
                 </tbody>
             </table>
+
+            {showModal && selectedCharacter && (
+                <CharacterModal
+                    character={selectedCharacter}
+                    onClose={handleCloseModal}
+                />
+            )}
 
             <PaginationControls
                 currentPage={currentPage}

@@ -2,11 +2,12 @@ import { Character } from "../types";
 
 interface ListItemProps {
     character: Character;
+    onListItemClick: (character: Character) => void;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ character }) => {
+const ListItem: React.FC<ListItemProps> = ({ character, onListItemClick }) => {
     return (
-        <tr>
+        <tr onClick={() => onListItemClick(character)}>
             <td>{character.id}</td>
             <td>{character.fullName}</td>
             <td>
