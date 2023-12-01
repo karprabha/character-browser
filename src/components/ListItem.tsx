@@ -7,14 +7,17 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ character, onListItemClick }) => {
     return (
-        <tr onClick={() => onListItemClick(character)}>
-            <td>{character.id}</td>
-            <td>{character.fullName}</td>
-            <td>
+        <tr
+            className="cursor-pointer hover:bg-gray-100"
+            onClick={() => onListItemClick(character)}
+        >
+            <td className="p-1 text-center">{character.id}</td>
+            <td className="p-1 text-center">{character.fullName}</td>
+            <td className="p-1 text-center">
                 <img
                     src={character.imageUrl}
                     alt={character.fullName}
-                    className="w-16 h-16 object-cover rounded-full"
+                    className="w-12 h-12 object-cover rounded-full text-center m-auto"
                 />
             </td>
         </tr>
