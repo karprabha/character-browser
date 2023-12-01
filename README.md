@@ -4,6 +4,9 @@ This is a simple React web application that fetches and displays Game of Thrones
 
 #### Visit Character Browser: [Game of Thrones Characters Browser](https://character-browser.netlify.app/)
 
+![homescreen-img](./docs/images/1.png)
+![modal-img](./docs/images/2.png)
+
 ## Features
 
 -   Displays a paginated table of Game of Thrones characters.
