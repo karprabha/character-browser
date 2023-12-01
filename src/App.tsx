@@ -3,8 +3,8 @@ import ListItem from "./components/ListItem";
 import { Character } from "./types";
 
 function App() {
-    const [characters, setCharacters] = useState<Character[]>([]);
     const [loading, setLoading] = useState(true);
+    const [characters, setCharacters] = useState<Character[]>([]);
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -26,24 +26,36 @@ function App() {
         };
 
         fetchCharacters();
-    });
+    }, []);
 
     return (
-        <div>
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <>
-                    <ul>
-                        {characters.map((character) => (
+        <div className="container mx-auto p-4">
+            <h1 className="text-3xl font-bold mb-4">
+                Game of Thrones Characters
+            </h1>
+            <table className="w-full">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loading ? (
+                        <tr>
+                            <td colSpan={4}>Loading...</td>
+                        </tr>
+                    ) : (
+                        characters.map((character) => (
                             <ListItem
                                 key={character.id}
                                 character={character}
                             />
-                        ))}
-                    </ul>
-                </>
-            )}
+                        ))
+                    )}
+                </tbody>
+            </table>
         </div>
     );
 }

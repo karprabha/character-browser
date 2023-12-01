@@ -6,16 +6,17 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ character }) => {
     return (
-        <li>
-            <div>
-                <img src={character.imageUrl} alt={character.fullName} />
-            </div>
-            <div>
-                <p>ID: {character.id}</p>
-                <p>Name: {character.fullName}</p>
-                <p>Family: {character.family}</p>
-            </div>
-        </li>
+        <tr>
+            <td>{character.id}</td>
+            <td>{character.fullName}</td>
+            <td>
+                <img
+                    src={character.imageUrl}
+                    alt={character.fullName}
+                    className="w-16 h-16 object-cover rounded-full"
+                />
+            </td>
+        </tr>
     );
 };
 
