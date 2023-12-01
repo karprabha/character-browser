@@ -2,6 +2,8 @@
 
 This is a simple React web application that fetches and displays Game of Thrones characters from the [ThronesAPI](https://thronesapi.com/).
 
+#### Visit Character Browser: [Game of Thrones Characters Browser](https://character-browser.netlify.app/)
+
 ## Features
 
 -   Displays a paginated table of Game of Thrones characters.
@@ -44,13 +46,17 @@ This is a simple React web application that fetches and displays Game of Thrones
 -   **src/components:** Contains React components used in the application.
 -   **src/types:** Defines TypeScript types for the project.
 -   **src/App.tsx:** Main application component.
--   **src/index.tsx:** Entry point of the application.
+-   **src/main.tsx:** Entry point of the application.
 
 ## Dependencies
 
 -   **React:** A JavaScript library for building user interfaces.
 -   **TypeScript:** A superset of JavaScript that adds static types.
 -   **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+
+## Dependency Graph
+
+![Dependency Graph](dependency-graph.svg)
 
 ## Credits
 
